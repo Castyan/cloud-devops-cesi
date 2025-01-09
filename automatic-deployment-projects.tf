@@ -1,43 +1,85 @@
+# Récupetrer les variables de init.sh
+variable "ORG_ID" {}
+variable "PROJECT_ID" {}
+variable "PROJECT_NAME" {}
+
 provider "google" {
-  project = var.project_id
-  region  = var.region
+  project = var.PROJECT_ID
+  region  = "eu-west10"
+  zone    = "eu-west10-b"
 }
 
-resource "google_folder" "parent_folder" {
-  display_name = "ParentFolder"
-  parent       = "organizations/${var.org_id}"
+# Création du projet ops
+resource "google_project" "ops" {
+  name       = "${var.PROJECT_NAME}-ops"
+  project_id = "${var.PROJECT_ID}-ops"
+  org_id     = var.ORG_ID
 }
 
-resource "google_project" "ops_project" {
-  name       = "cloud-devops-example-ops"
-  project_id = "cloud-devops-example-ops"
-  folder_id  = google_folder.parent_folder.name
+# Création du projet prod
+resource "google_project" "prod" {
+  name       = "${var.PROJECT_NAME}-prod"
+  project_id = "${var.PROJECT_ID}-prod"
+  org_id     = var.ORG_ID
 }
 
-resource "google_project" "prod_project" {
-  name       = "cloud-devops-example-prod"
-  project_id = "cloud-devops-example-prod"
-  folder_id  = google_folder.parent_folder.name
+# Création compte de service pour ops
+resource "google_service_account" "ops" {
+  account_id   = "ops"
+  display_name = "ops"
+  project      = google_project.ops.project_id
 }
 
-resource "google_service_account" "ops_service_account" {
-  account_id   = "service-ops"
-  display_name = "Service Account for Ops"
-  project      = google_project.ops_project.project_id
+# Création compte de service pour prod
+resource "google_service_account" "prod" {
+  account_id   = "prod"
+  display_name = "prod"
+  project      = google_project.prod.project_id
 }
 
-resource "google_service_account" "prod_service_account" {
-  account_id   = "service-prod"
-  display_name = "Service Account for Prod"
-  project      = google_project.prod_project.project_id
+# Création des rôles
+resource "google_project_iam_custom_role" "ops" {
+  role_id     = "ops"
+  title       = "ops"
+  description = "ops"
+  permissions = [
+    "roles/compute.admin",
+    "roles/storage.admin",
+    "roles/iam.serviceAccountUser",
+    "roles/iam.serviceAccountAdmin",
+    "roles/iam.roleAdmin",
+    "roles/iam.serviceAccountKeyAdmin",
+    "roles/iam.serviceAccountKeyAdmin
+  ]
 }
 
-resource "google_project_iam_member" "ops_iam_binding" {
-  project = google_project.ops_project.project_id
-  role    = "roles/owner"
-  member  = "serviceAccount:${google_service_account.ops_service_account.email}"
+resource "google_project_iam_custom_role" "prod" {
+  role_id     = "prod"
+  title       = "prod"
+  description = "prod"
+  permissions = [
+    "roles/compute.admin",
+    "roles/storage.admin",
+    "roles/iam.serviceAccountUser",
+    "roles/iam.serviceAccountAdmin",
+    "roles/iam.roleAdmin",
+    "roles/iam.serviceAccountKeyAdmin",
+    "roles/iam.serviceAccountKeyAdmin
+  ]
+  }
+# Attribution des rôles
+resource "google_project_iam_binding" "ops" {
+  project = google_project.ops.project_id
+  role    = google_project_iam_custom_role.ops.role_id
+  members = [
+    "serviceAccount:${google_service_account.ops.email}"
+  ]
 }
 
-resource "google_project_iam_member" "prod_iam_binding" {
-  project = google_project.prod_project.project_id
-  role    =
+resource "google_project_iam_binding" "prod" {
+  project = google_project.prod.project_id
+  role    = google_project_iam_custom_role.prod.role_id
+  members = [
+    "serviceAccount:${google_service_account.prod.email}"
+  ]
+}
