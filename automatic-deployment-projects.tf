@@ -1,9 +1,8 @@
-# Récupetrer les variables de init.sh
-variable "ORG_ID" {}
-variable "PROJECT_ID" {}
-variable "PROJECT_NAME" {}
+# Récupetrer les variables déjà déclaré dans init.sh
+source init.sh
 
 provider "google" {
+  credentials = file("cle.json")
   project = var.PROJECT_ID
   region  = "eu-west10"
   zone    = "eu-west10-b"
