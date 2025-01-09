@@ -1,4 +1,3 @@
-# automatic-deployment-projects.yaml
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -12,17 +11,29 @@ steps:
       - 'cloud-devops-example-prod'
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
+      - 'iam'
+      - 'service-accounts'
+      - 'create'
+      - 'service-ops'
+      - '--display-name=Service Account for Ops'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'iam'
+      - 'service-accounts'
+      - 'create'
+      - 'service-prod'
+      - '--display-name=Service Account for Prod'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
       - 'projects'
       - 'add-iam-policy-binding'
-      - 'cloud-devops-ops'
-      # Ceci est le service account qui sera utilisé pour déployer sur le projet ops
-      - '--member=serviceAccount:service.ops'
+      - 'cloud-devops-example-ops'
+      - '--member=serviceAccount:service-ops@cloud-devops-example-ops.iam.gserviceaccount.com'
       - '--role=roles/owner'
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'projects'
       - 'add-iam-policy-binding'
-      - 'cloud-devops-prod'
-      # Ceci est le service account qui sera utilisé pour déployer sur le projet prod
-      - '--member=serviceAccount:service.prod'
+      - 'cloud-devops-example-prod'
+      - '--member=serviceAccount:service-prod@cloud-devops-example-prod.iam.gserviceaccount.com'
       - '--role=roles/owner'
