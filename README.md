@@ -6,6 +6,8 @@
 - **`cloud-devops-example-ops`** : Pour les outils CI/CD et la gestion des états Terraform.
 - **`cloud-devops-example-prod`** : Pour l'environnement de production.
 
+Via le fichier "automatic-deployment-project.yaml"
+
 ### b. Configuration des identifiants et API
 - Activer les API GCP nécessaires :
   - Compute Engine
