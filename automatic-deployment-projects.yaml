@@ -1,0 +1,26 @@
+# automatic-deployment.yaml
+steps:
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'projects'
+      - 'create'
+      - 'cloud-devops-example-ops'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'projects'
+      - 'create'
+      - 'cloud-devops-example-prod'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'projects'
+      - 'add-iam-policy-binding'
+      - 'cloud-devops-example-ops'
+      - '--member=serviceAccount:YOUR_SERVICE_ACCOUNT'
+      - '--role=roles/owner'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'projects'
+      - 'add-iam-policy-binding'
+      - 'cloud-devops-example-prod'
+      - '--member=serviceAccount:YOUR_SERVICE_ACCOUNT'
+      - '--role=roles/owner'
