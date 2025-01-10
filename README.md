@@ -1,6 +1,6 @@
 # Cloud & DevOps Example
 
-Ce projet est créé dans le cadre des interventions que je réalise auprès d'étudiants sur l'initiation aux pratiques Cloud et DevOps. Pour cet exemple, je m'appuie sur Google Cloud Platform (GCP) pour déployer une application sur Google Compute Engine (GCE) en utilisant Packer, Terraform, Ansible et Cloud Build pour la CI/CD.
+Ce projet est créé dans le cadre d'une initiation aux pratiques Cloud et DevOps. Pour cet exemple, je m'appuie sur Google Cloud Platform (GCP) pour déployer une application sur Google Compute Engine (GCE) en utilisant Packer, Terraform, Ansible et Cloud Build pour la CI/CD.
 
 ## Table des matières
 1. [Architecture](#architecture)
