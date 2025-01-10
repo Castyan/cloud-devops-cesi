@@ -48,7 +48,7 @@ resource "google_cloudbuild_trigger" "ops_trigger" {
       args = ["build", "-t", "gcr.io/${var.PROJECT_ID_OPS}/your-image", "."]
     }
     images = ["gcr.io/${var.PROJECT_ID_OPS}/your-image"]
-    # ce que je doitr faire : 
+    # ce que je doit finir : 
     # - créer un fichier Dockerfile
     # - créer un fichier index.html
     # - créer un fichier app.js
