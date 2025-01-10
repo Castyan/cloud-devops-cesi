@@ -1,0 +1,24 @@
+# Ce que fait ce fichier de configuration Cloud Build :
+# - Build du binaire Go
+# - Push du binaire dans Artifact Registry
+# Plus simplement : 
+# - Compile le code source Go en un binaire exécutable
+# - Pousse le binaire dans Artifact Registry
+
+steps:
+
+##### Pipeline 1 : Build and store app package on Artifact Registry #####
+- name: 'gcr.io/cloud-builders/go'
+  args: ['build', '-o', 'app', '.']
+  dir: 'app'
+
+
+##### Pipeline 2 : Build and store Compute Image Witch Packer on Compute Engine #####
+- name: 'gcr.io/cloud-builders/packer'
+  args: ['build', 'packer.json']
+  dir: 'packer'
+
+##### Pipeline 3 : Build and manage ON PROJECT : projet-devops-ops3 #####
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['projects', 'add-iam-policy-binding', 'projet-devops-ops3', '--member=serviceAccount:Terraform PROD Service Account1', '--role=roles/compute.admin']
+
