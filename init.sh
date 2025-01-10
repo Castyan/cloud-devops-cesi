@@ -2,8 +2,8 @@
 
 # Authentification avec Google Cloud en tant qu'administrateur
 echo "Veuillez vous authentifier avec un compte administrateur GCP."
-#gcloud auth login
-#gcloud auth application-default login
+gcloud auth login
+gcloud auth application-default login
 
 # Récupération des variables dans variables.tf
 ORG_ID=$(grep 'ORG_ID' variables.tf | awk -F'"' '{print $4}')
