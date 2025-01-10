@@ -1,7 +1,7 @@
 variable "ORG_ID" {
   description = "ID de l'organisation"
   type        = string
-  # attribuer la valeur de l'ID de l'organisation
+  # attribuer la valeur de l'ID de l'organisationurope-west1 gs://projet-devops-ops5-cloud-storage Creating gs://projet-devops-ops5-cloud-storage/... ServiceException: 409 A Cloud Storage bucket named 'projet-devops-ops5-cloud-storage' already exists. Try another name. Bucket names must be globally unique across all Google Cloud projects, including those outside of your organization. root@vm-ubuntu:</del>/test/cloud-devops-cesi# terraform init Initializing the backend...
   default     = "80379980974"
 }
 

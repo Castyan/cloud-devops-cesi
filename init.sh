@@ -79,4 +79,5 @@ gcloud auth application-default login
 gcloud auth application-default set-quota-project projet-devops-ops5
 terraform init
 terraform plan
+terraform import google_storage_bucket.terraform_state projet-devops-ops5-terraform-state-unique
 terraform apply -auto-approve
