@@ -2,20 +2,29 @@
 
 ## **1. Préparer les environnements**
 
-### a. Création des projets GCP
-- **`cloud-devops-example-ops`** : Pour les outils CI/CD et la gestion des états Terraform.
-- **`cloud-devops-example-prod`** : Pour l'environnement de production.
+### a. Création d'un projet "maître" '
 
-Via le fichier "automatic-deployment-project.yaml"
+#### 1. Connectez-vous à Google Cloud Console
+- Accédez à [Google Cloud Console](https://console.cloud.google.com/).
 
-### b. Configuration des identifiants et API
-- Activer les API GCP nécessaires :
-  - Compute Engine
-  - Cloud Build
-  - Artifact Registry
-  - Cloud Storage
-  - Cloud Monitoring
-- Configurer les comptes de service et attribuer les rôles requis (IAM).
+#### 2. Créez le projet Maitre
+- Cliquez sur le menu déroulant du projet en haut de la page et sélectionnez "Nouveau projet".
+- Entrez le nom du projet : `cloud-devops-maitre`.
+- Cliquez sur "Créer".
+
+chmod +x init.sh
+Exécutez le script init.sh
+
+#### 2. Configurer les comptes de service et attribuer les rôles requis (IAM)
+- Accédez à "IAM & Admin" > "Comptes de service".
+- Créez un compte de service pour chaque projet avec les rôles nécessaires :
+  - `roles/editor`
+  - `roles/iam.serviceAccountUser`
+  - `roles/resourcemanager.projectIamAdmin`
+  - `roles/storage.admin`
+  - `roles/compute.admin`
+
+- Téléchargez la clé JSON pour chaque compte de service et conservez-la en lieu sûr.
 
 ---
 
