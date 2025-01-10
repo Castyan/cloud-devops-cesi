@@ -19,5 +19,5 @@ steps:
 
 ##### Pipeline 3 : Build and manage ON PROJECT : projet-devops-ops3 #####
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['projects', 'add-iam-policy-binding', 'projet-devops-ops3', '--member=serviceAccount:Terraform PROD Service Account1', '--role=roles/compute.admin']
+  args: ['projects', 'add-iam-policy-binding', 'projet-devops-ops4', '--member=serviceAccount:Terraform PROD Service Account1', '--role=roles/compute.admin']
 
