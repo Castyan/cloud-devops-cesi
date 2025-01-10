@@ -51,7 +51,7 @@ gcloud services enable cloudresourcemanager.googleapis.com compute.googleapis.co
 gcloud iam service-accounts create terraform-sa --display-name "Terraform OPS Service Account2"
 # Attribution du rôles admin
 gcloud projects add-iam-policy-binding $PROJECT_ID_OPS --member=serviceAccount:terraform-sa@$PROJECT_ID_OPS.iam.gserviceaccount.com --role=roles/editor
-gcloud projects add-iam-policy-binding $PROJECT_ID_PROD --member=serviceAccount:terraform-sa@$PROJECT_ID_PROD.iam.gserviceaccount.com --role=roles/storage.admin
+gcloud projects add-iam-policy-binding $PROJECT_ID_OPS --member=serviceAccount:terraform-sa@$PROJECT_ID_PROD.iam.gserviceaccount.com --role=roles/storage.admin
 # Création de la clé
 gcloud iam service-accounts keys create cle-ops.json --iam-account=terraform-sa@$PROJECT_ID_OPS.iam.gserviceaccount.com
 
@@ -75,6 +75,8 @@ gcloud iam service-accounts keys create cle-prod.json --iam-account=terraform-sa
 # Création des buckets
 gsutil mb -p $PROJECT_ID_OPS -l europe-west1 gs://$PROJECT_ID_OPS-cloud-storage
 
+gcloud auth application-default login
+gcloud auth application-default set-quota-project projet-devops-ops5
 terraform init
 terraform plan
-terraform apply
+terraform apply -auto-approve
