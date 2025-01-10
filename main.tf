@@ -25,23 +25,21 @@ resource "google_artifact_registry_repository" "ops_repo" {
   format = "DOCKER"
   description = "Artifact Registry for Ops environment"
 }
-# OK
 
 # Cloud Storage for Terraform state
 resource "google_storage_bucket" "terraform_state" {
-  name     = "${var.PROJECT_ID_OPS}-terraform-state"
+  name     = "${var.PROJECT_ID_OPS}-cloud-storage"
   location = var.REGION
   project  = var.PROJECT_ID_OPS
 
-  uniform_bucket_level_access = false
+  uniform_bucket_level_access = true
 }
 
-# Cloud Build Trigger
 resource "google_cloudbuild_trigger" "ops_trigger" {
   provider = google.ops
   trigger_template {
     project_id = var.PROJECT_ID_OPS
-    repo_name  = "repertoire-cloud-build"
+    repo_name  = "ops-artefact-repo"
     branch_name = "main"
   }
   build {
@@ -52,3 +50,4 @@ resource "google_cloudbuild_trigger" "ops_trigger" {
     images = ["gcr.io/${var.PROJECT_ID_OPS}/your-image"]
   }
 }
+

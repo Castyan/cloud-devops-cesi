@@ -16,10 +16,10 @@ BILLING_ACCOUNT_ID=$(grep 'BILLING_ACCOUNT_ID' variables.tf | awk -F'"' '{print 
 if [ -z "$ORG_ID" ] || [ -z "$PROJECT_ID_OPS" ] || [ -z "$PROJECT_NAME_OPS" ] || [ -z "$PROJECT_ID_PROD" ] || [ -z "$PROJECT_NAME_PROD" ] || [ -z "$BILLING_ACCOUNT_ID" ]; then
     # attribution des variables
     ORG_ID="80379980974"
-    PROJECT_ID_OPS="projet-devops-ops4"
-    PROJECT_NAME_OPS="projet-devops-ops4"
-    PROJECT_ID_PROD="projet-devops-prod4"
-    PROJECT_NAME_PROD="projet-devops-prod4"
+    PROJECT_ID_OPS="projet-devops-ops3"
+    PROJECT_NAME_OPS="projet-devops-ops3"
+    PROJECT_ID_PROD="projet-devops-prod3"
+    PROJECT_NAME_PROD="projet-devops-prod3"
     BILLING_ACCOUNT_ID="01C959-AE072B-E7B61E"
 fi
 
@@ -51,6 +51,7 @@ gcloud services enable cloudresourcemanager.googleapis.com compute.googleapis.co
 gcloud iam service-accounts create terraform-sa --display-name "Terraform OPS Service Account1"
 # Attribution du rôles admin
 gcloud projects add-iam-policy-binding $PROJECT_ID_OPS --member=serviceAccount:terraform-sa@$PROJECT_ID_OPS.iam.gserviceaccount.com --role=roles/editor
+gcloud projects add-iam-policy-binding $PROJECT_ID_PROD --member=serviceAccount:terraform-sa@$PROJECT_ID_PROD.iam.gserviceaccount.com --role=roles/storage.admin
 # Création de la clé
 gcloud iam service-accounts keys create cle-ops.json --iam-account=terraform-sa@$PROJECT_ID_OPS.iam.gserviceaccount.com
 
@@ -66,5 +67,10 @@ gcloud services enable cloudresourcemanager.googleapis.com compute.googleapis.co
 gcloud iam service-accounts create terraform-sa --display-name "Terraform PROD Service Account1"
 # Attribution du rôles admin
 gcloud projects add-iam-policy-binding $PROJECT_ID_PROD --member=serviceAccount:terraform-sa@$PROJECT_ID_PROD.iam.gserviceaccount.com --role=roles/editor
+gcloud projects add-iam-policy-binding $PROJECT_ID_PROD --member=serviceAccount:terraform-sa@$PROJECT_ID_PROD.iam.gserviceaccount.com --role=roles/storage.admin
 # Création de la clé
 gcloud iam service-accounts keys create cle-prod.json --iam-account=terraform-sa@$PROJECT_ID_PROD.iam.gserviceaccount.com
+
+
+# Création des buckets
+gsutil mb -p $PROJECT_ID_OPS -l europe-west1 gs://$PROJECT_ID_OPS-terraform-state
