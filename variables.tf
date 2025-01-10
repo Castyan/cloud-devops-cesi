@@ -8,25 +8,25 @@ variable "ORG_ID" {
 variable "PROJECT_ID_OPS" {
   description = "ID du projet Ops"
   type        = string
-  default     = "projet-devops-ops3"
+  default     = "projet-devops-ops5"
 }
 
 variable "PROJECT_ID_PROD" {
   description = "ID du projet Prod"
   type        = string
-    default     = "projet-devops-prod3"
+    default     = "projet-devops-prod5"
 }
 
 variable "PROJECT_NAME_OPS" {
   description = "Nom du projet Ops"
   type        = string
-  default     = "projet-devops-ops3"
+  default     = "projet-devops-ops5"
 }
 
 variable "PROJECT_NAME_PROD" {
   description = "Nom du projet Prod"
   type        = string
-  default     = "projet-devops-ops3"
+  default     = "projet-devops-ops5"
 }
 
 variable "BILLING_ACCOUNT_ID" {

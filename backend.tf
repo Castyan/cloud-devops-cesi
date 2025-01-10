@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket  = "projet-devops-ops3-terraform-state"
+    bucket  = "projet-devops-ops5-cloud-storage"
     prefix  = "envs/prod"
   }
 }
