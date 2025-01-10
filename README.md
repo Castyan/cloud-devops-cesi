@@ -28,7 +28,10 @@ Créez un projet `cloud-devops-maitre`
 Attribuer les droits de votre administrateur sur le projet
 Récuperez l'ID du projet 
 Dans un environnement Ubuntu de préférence :
-Téléchargez le code GitHub git clone `https://github.com/Castyan/cloud-devops-cesi.git`, allez dans le repertoir `cd cloud-devops-cesi/` puis lancez la commande `chmod +x init.sh` et enfin `./init.sh`
+Téléchargez le code GitHub git clone `https://github.com/Castyan/cloud-devops-cesi.git`
+Allez dans le repertoir `cd cloud-devops-cesi/`
+Lancez la commande `chmod +x init.sh`
+Lancez la commande `./init.sh`
 Collez l'ID du projet maitre créé précédemment
 
 Le code se charge d'installer les dépendances, de créer les projets, de créer les comptes, d'attribuer la facturation a ces comptes, d'activer les API, de créer les pipelines etc ...
