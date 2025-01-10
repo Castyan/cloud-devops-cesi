@@ -16,10 +16,10 @@ BILLING_ACCOUNT_ID=$(grep 'BILLING_ACCOUNT_ID' variables.tf | awk -F'"' '{print 
 if [ -z "$ORG_ID" ] || [ -z "$PROJECT_ID_OPS" ] || [ -z "$PROJECT_NAME_OPS" ] || [ -z "$PROJECT_ID_PROD" ] || [ -z "$PROJECT_NAME_PROD" ] || [ -z "$BILLING_ACCOUNT_ID" ]; then
     # attribution des variables
     ORG_ID="80379980974"
-    PROJECT_ID_OPS="projet-devops-ops"
-    PROJECT_NAME_OPS="projet-devops-ops"
-    PROJECT_ID_PROD="projet-devops-prod"
-    PROJECT_NAME_PROD="projet-devops-prod"
+    PROJECT_ID_OPS="projet-devops-ops4"
+    PROJECT_NAME_OPS="projet-devops-ops4"
+    PROJECT_ID_PROD="projet-devops-prod4"
+    PROJECT_NAME_PROD="projet-devops-prod4"
     BILLING_ACCOUNT_ID="01C959-AE072B-E7B61E"
 fi
 

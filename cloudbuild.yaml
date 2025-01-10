@@ -12,7 +12,6 @@ steps:
   args: ['build', '-o', 'app', '.']
   dir: 'app'
 
-
 ##### Pipeline 2 : Build and store Compute Image Witch Packer on Compute Engine #####
 - name: 'gcr.io/cloud-builders/packer'
   args: ['build', 'packer.json']

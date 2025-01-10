@@ -41,4 +41,3 @@ Le script est exécuté avec la commande bash init.sh.
 Le script est exécuté dans le Cloud Shell de Google Cloud Platform.
 Le script est exécuté avec un compte administrateur GCP.
 
-
